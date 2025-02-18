@@ -5,7 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor // 기본 생성자 자동 생성
+@AllArgsConstructor // 모든 필드를 받는 생성자 자동 생성
 @Entity
 public class Quote {
 
