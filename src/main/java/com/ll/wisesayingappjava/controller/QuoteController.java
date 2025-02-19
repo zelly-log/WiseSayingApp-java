@@ -20,6 +20,7 @@ public class QuoteController {
         this.quoteService = quoteService;
     }
 
+
     @GetMapping
     public Page<Quote> getQuotes(@RequestParam(defaultValue = "1") int page){
         Pageable pageable = PageRequest.of(page-1,5);

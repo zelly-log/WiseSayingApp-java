@@ -4,6 +4,7 @@ import com.ll.wisesayingappjava.model.Quote;
 import com.ll.wisesayingappjava.repository.QuoteRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,21 @@ import org.springframework.stereotype.Service;
 public class QuoteService {
 
     private final QuoteRepository quoteRepository;
+
+    // 명언 수정 기능
+    public Quote updateQuote(Long id, String updateAuthor, String cupdateContent){
+        Optional<Quote> optionalQuote = quoteRepository.findById(id);
+
+        if (optionalQuote.isEmpty()){
+            return null;
+        }
+
+        Quote quote = optionalQuote.get();
+        quote.setAuthor(updateAuthor);
+        quote.setContent(cupdateContent);
+
+        return quoteRepository.save(quote);
+    }
 
     // 명언 저장 기능
     public Quote savedQuote(String author, String content){

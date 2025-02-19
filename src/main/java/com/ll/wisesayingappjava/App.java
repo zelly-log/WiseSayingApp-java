@@ -49,7 +49,22 @@ public class App {
                 System.out.println(savedQuote.getId()+"번 명언이 등록되었습니다.");
 
             } else if (input.equals("수정")) {
-                System.out.println("명언 수정 로직");
+                System.out.println("수정할 명언 번호를 입력하세요.");
+                Long updateId = Long.parseLong(sc.nextLine().trim());
+
+                Quote existingQuote = quoteService.updateQuote(updateId, "","");
+                if (existingQuote == null){
+                    System.out.println(updateId+"번 명언은 존재하지 않습니다.");
+                    continue;
+                }
+
+                System.out.println("수정할 명언 작가를 입력하세요.");
+                String updateAuthor = sc.nextLine();
+                System.out.println("수정할 명언 내용을 입력하세요.");
+                String updateContent = sc.nextLine();
+
+                Quote updateQuote = quoteService.updateQuote(updateId, updateAuthor, updateContent);
+                System.out.println(updateQuote.getId()+"번 명언이 수정되었습니다.");
 
             } else if (input.equals("삭제")) {
                 System.out.println("명언 삭제 로직");
