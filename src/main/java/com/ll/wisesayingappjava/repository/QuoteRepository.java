@@ -1,6 +1,7 @@
 package com.ll.wisesayingappjava.repository;
 
 import com.ll.wisesayingappjava.model.Quote;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,5 @@ public interface QuoteRepository extends JpaRepository<Quote, Long> {
     @Query("SELECT q from Quote q where q.author like %:keyword% or q.content like %:keyword%")
     Page<Quote> searchBykeword(@Param("keyword") String keyword, Pageable pageable);
 
+    Optional<Quote> findTopByOrderByIdDesc();
 }

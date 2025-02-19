@@ -1,11 +1,14 @@
 package com.ll.wisesayingappjava;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ll.wisesayingappjava.model.Quote;
 import com.ll.wisesayingappjava.service.QuoteService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class App {
@@ -43,8 +46,8 @@ public class App {
                 System.out.println("명언");
                 String content = sc.nextLine();
 
-                Quote savedQuote = quoteService.savedQuote(author, content);
-                System.out.println(savedQuote.getId()+"번 명언이 등록되었습니다.");
+                Quote saveQuote = quoteService.saveQuote(author, content);
+                System.out.println(saveQuote.getId()+"번 명언이 등록되었습니다.");
 
             } else if (input.equals("수정")) {
                 System.out.println("수정할 명언 번호를 입력하세요.");
