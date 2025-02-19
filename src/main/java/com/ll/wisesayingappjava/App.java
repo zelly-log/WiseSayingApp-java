@@ -84,6 +84,10 @@ public class App {
                 System.out.println("프로그램을 종료합니다.");
                 break;
 
+            } else if(input.equals("빌드")){
+                System.out.println("저장된 명언들을 발드합니다.");
+                quoteService.buildAllQuotes();
+
             } else {
                 System.out.println("목록 / 등록 / 수정 / 삭제 / 종료 중 해당하는 명령어를 입력해 주세요.");
             }

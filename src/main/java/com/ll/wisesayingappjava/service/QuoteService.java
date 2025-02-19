@@ -129,6 +129,19 @@ public class QuoteService {
         return quoteRepository.searchBykeword(keyword,pageable);
     };
 
+    // 명언 빌드 기능
+    public void buildAllQuotes(){
+        try {
+            List<Quote> quotes = quoteRepository.findAll();
 
+            String json = objectMapper.writeValueAsString(quotes);
 
+            Files.writeString(Paths.get(DB_PATH + "/data.json"), json);
+
+            System.out.println("모든 명언을 포함하는 data.json 파일이 생성되었습니다!");
+
+        } catch (IOException e) {
+            throw new RuntimeException("data.json 생성 중 오류 발생: \" + e.getMessage()");
+        }
+    }
 }
