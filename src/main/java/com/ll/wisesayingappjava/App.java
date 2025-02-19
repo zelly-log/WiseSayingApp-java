@@ -4,8 +4,6 @@ import com.ll.wisesayingappjava.model.Quote;
 import com.ll.wisesayingappjava.service.QuoteService;
 import java.util.List;
 import java.util.Scanner;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 
@@ -67,7 +65,17 @@ public class App {
                 System.out.println(updateQuote.getId()+"번 명언이 수정되었습니다.");
 
             } else if (input.equals("삭제")) {
-                System.out.println("명언 삭제 로직");
+                System.out.println("삭제할 명언 번호를 입력하세요.");
+                Long deleteId = Long.parseLong(sc.nextLine().trim());
+
+                boolean isDeleted = quoteService.deleteQuote(deleteId);
+
+                if(!isDeleted)
+                {
+                    System.out.println(deleteId + "번 명언이 존재하지 않습니다.");
+                } else{
+                    System.out.println(deleteId + "번 명언이 삭제되었습니다.");
+                }
 
             } else if (input.equals("종료")) {
                 System.out.println("프로그램을 종료합니다.");

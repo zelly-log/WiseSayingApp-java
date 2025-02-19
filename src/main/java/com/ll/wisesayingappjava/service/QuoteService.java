@@ -16,9 +16,22 @@ public class QuoteService {
 
     private final QuoteRepository quoteRepository;
 
+    // 명언 삭제 기능
+    public boolean deleteQuote(Long deleteId) {
+        Optional<Quote> optionalQuote = quoteRepository.findById(deleteId);
+
+        if (optionalQuote.isEmpty()) {
+            return false;
+        }
+
+        quoteRepository.deleteById(deleteId);
+        return true;
+
+    }
+
     // 명언 수정 기능
-    public Quote updateQuote(Long id, String updateAuthor, String cupdateContent){
-        Optional<Quote> optionalQuote = quoteRepository.findById(id);
+    public Quote updateQuote(Long updateid, String updateAuthor, String cupdateContent){
+        Optional<Quote> optionalQuote = quoteRepository.findById(updateid);
 
         if (optionalQuote.isEmpty()){
             return null;
@@ -37,6 +50,7 @@ public class QuoteService {
         return quoteRepository.save(quote);
     }
 
+
     // 명언 목록 조회 (페이징 처리 x)
     public List<Quote> getAllQuotesList(){
         return quoteRepository.findAll();
@@ -51,5 +65,7 @@ public class QuoteService {
     public Page<Quote> searchQuotes(String keyword, Pageable pageable){
         return quoteRepository.searchBykeword(keyword,pageable);
     };
+
+
 
 }
